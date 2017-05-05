@@ -170,7 +170,7 @@ def predict(image_path):
 
     # combine potential part in equation
     updated_symbol_list = pf.update(image_path, test_symbol_list)
-    
+
     # for each result in result list add it into return list
     for s in updated_symbol_list:
         pre_symbol = SymPred(s[1], s[2], s[3], s[4], s[5])

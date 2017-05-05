@@ -8,11 +8,19 @@ import PIL.ImageOps
 import numpy as np
 from skimage.transform import resize,warp,AffineTransform
 
+'''
+ProcessI class is used for process image, to convert it to 28*28 size from original size, and it also has
+deformation method to transform its shape, but for now, we don't implement it in our train images set
+'''
 class ProcessI:
     def __init__(self, datart):
         self.dataroot = datart
 
     def processImage(self, image_name):
+        '''
+        hiden code should be visible when processing extra images from kaggle, it is to invert its background
+        and to grey mode, and dilate it to (3,3). For other train and test or predict images, we don't need it
+        '''
         # im = Image.open(self.dataroot +image_name).convert('L')
         # bkcolor = im.getpixel((0,0))
         # if bkcolor > 250:

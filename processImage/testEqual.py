@@ -2,10 +2,11 @@ import os
 import cv2
 from PIL import Image
 
+'''
+This class is used to seperate single symbol with equation according to its file name length
+'''
 # This class is used to seperate single and equation from the annotated data
 class TestEqual:
-    # def _init_(self):
-
     def getEqual(self):
         dataroot = os.getcwd() + "/data/annotated_train/"
         saveroot = os.getcwd() + "/data/train/"

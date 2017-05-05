@@ -4,7 +4,9 @@ from processI import ProcessI
 import random
 
 data_mtrain_root = os.getcwd() + "/SelectedTrainingSet"
-
+'''
+This file is to process extra images from Kaggle!!!
+'''
 for subdir in os.listdir(data_mtrain_root):
      if not subdir.startswith("."):
          for f in os.listdir(data_mtrain_root + "/" +subdir):

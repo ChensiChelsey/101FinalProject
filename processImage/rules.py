@@ -1,3 +1,7 @@
+'''
+This is our label rules and back_rules for each symbol in our train and predict file 
+'''
+
 class Rules():
     def __init__(self):
         self.sy = ['dots', 'tan', ')', '(', '+', '-', 'sqrt', '1', '0', '3', '2', '4', '6', 'mul', 'pi', '=', 'sin', 'pm', 'A',

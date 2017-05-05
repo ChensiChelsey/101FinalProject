@@ -8,27 +8,23 @@ import numpy as np
 from processI import ProcessI
 from skimage.transform import resize,warp,AffineTransform
 
-class PreSymbol:
+'''
+Get the all .png files in the train or test directory, and using the ProcessImage method in ProcessI class
+to process the image, and save it in the same place, thus we can get 28*28 grey mode image for both train and test images of
+single symbols
+'''
 
+class PreSymbol:
     def __init__(self):
-        self.dataroot = os.getcwd() + "/data/test/"
+        self.dataroot = os.getcwd() + "/data/train/" # change to "/data/test/"
         self.ps = ProcessI(self.dataroot)
 
     def getsymbol(self):
-        # filelist = [ f for f in os.listdir(self.dataroot) if f.endswith(".png") ]
-        # for f in filelist:
-        #     os.remove(self.dataroot + f)
+
         for f in os.listdir(self.dataroot):
             if f.endswith(".png"):
                 im1,im2 = self.ps.processImage(f) #im1 is image data, im2 is image
-                im2.save(self.dataroot+f)
-
-                # im3 = cv2.imread(self.dataroot+f)
-                # print im3
-                # im3 = self.ps.image_deformation(im3)
-                # # print im3
-                # im4 = Image.fromarray(np.uint8(im3))
-                # im4.save(self.dataroot+"trans"+f)
+                im2.save(self.dataroot+f) #save 28*28 size image 
 
 if __name__ == "__main__":
     PreSymbol().getsymbol()

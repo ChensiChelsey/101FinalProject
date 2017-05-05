@@ -16,7 +16,7 @@ layer1Feature = 16
 layer1Patch = 5, 5
 layer2Feature = 32
 layer2Patch = 5, 5
-hiddenLayer = 128  # the more hiddenLayer number, the less general the model will perform
+hiddenLayer = 100  # the more hiddenLayer number, the less general the model will perform
 dropoffRate = 0.5  # reduce overfitting
 layer3Feature = 64
 layer3Patch = 5, 5
@@ -104,16 +104,10 @@ for i in range(steps):
   for batchd in batch:
       batch_x.append(data["images"][batchd])
       batch_y.append(data["labels"][batchd])
-  # print batch_x[2]
-  # print batch_y[2]
   if i%100 == 0:
-    #   print batch_x[2]
-    #   print batch_y[2]
-    #   print 1
       train_accuracy = accuracy.eval(feed_dict={x:batch_x, y_: batch_y, keep_prob: 1.0})
       print("step %d, training accuracy %g"%(i, train_accuracy))
-    #   print 2
-  # print i
+
   train_step.run(feed_dict={x: batch_x, y_: batch_y, keep_prob: dropoffRate})
 
 save_path = saver.save(sess, "model.ckpt")

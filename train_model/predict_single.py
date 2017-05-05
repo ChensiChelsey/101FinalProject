@@ -17,7 +17,7 @@ layer1Feature = 16
 layer1Patch = 5, 5
 layer2Feature = 32
 layer2Patch = 5, 5
-hiddenLayer = 128  # the more hiddenLayer number, the less general the model will perform
+hiddenLayer = 100  # the more hiddenLayer number, the less general the model will perform
 dropoffRate = 0.5  # reduce overfitting
 layer3Feature = 64
 layer3Patch = 5, 5
@@ -105,7 +105,6 @@ def predictint():
         hit = 0
         for f in data["images"]:
             # print (fn)
-
             prediction=tf.argmax(y_conv,1)
             predint = prediction.eval(feed_dict={x: [data["images"][f]],keep_prob: 1.0}, session=sess)
             # print f
@@ -124,32 +123,10 @@ def predictint():
             else:
                 nnfile.write("%s\t%s\n" %(f,brules[predint[0]]))
             number = number + 1
-                # print f, (predint[0]) #first value in list
         nf.close()
 
         print "see result is in result.txt"
         print "Accuracy is ", (hit/float(number))
-
-# def imageprepare(argv):
-#     im = Image.open(argv).convert('L')
-#     width = float(im.size[0])
-#     height = float(im.size[1])
-#     newImage = Image.new('L', (28, 28), (0)) #creates black canvas of 28x28 pixels
-#
-#     if width > height: #check which dimension is bigger
-#         nheight = int(round((20.0/width*height),0)) #resize height according to ratio width
-#         img = im.resize((20,nheight), Image.ANTIALIAS).filter(ImageFilter.SHARPEN)
-#         wtop = int(round(((28 - nheight)/2),0)) #caculate horizontal pozition
-#         newImage.paste(img, (4, wtop)) #paste resized image
-#     else:
-#         nwidth = int(round((20.0/height*width),0)) #resize width according to ratio height
-#         img = im.resize((nwidth,20), Image.ANTIALIAS).filter(ImageFilter.SHARPEN)
-#         wleft = int(round(((28 - nwidth)/2),0)) #caculate vertical pozition
-#         newImage.paste(img, (wleft, 4)) #paste resized image on
-#     tv = list(newImage.getdata()) #get pixel values
-#     #normalize pixels to 0 and 1. 0 is pure white, 1 is pure black.
-#     tva = [ 1-(255-x)*1.0/255.0 for x in tv]
-#     return tva
 
 def main():
     predint = predictint()

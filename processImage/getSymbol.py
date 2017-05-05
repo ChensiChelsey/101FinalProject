@@ -4,6 +4,12 @@ import os
 from processI import ProcessI
 from rules import Rules
 
+'''
+it is used to generete train and test pickle files for train model and test model, we generate 2 kinds of train
+pickle, train1.pkl is a larger train set adding extra images from kaggle, there are around 40 symboles and 1000 images
+for each symbol. 
+'''
+
 rules = Rules().getrules()
 data_train_root = os.getcwd() + "/data/train/"
 data_test_root = os.getcwd() + "/data/test/"
