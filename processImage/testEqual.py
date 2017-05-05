@@ -20,6 +20,5 @@ def main():
     x = TestEqual()
     x.getEqual()
 
-
 if __name__ == "__main__":
     main()
