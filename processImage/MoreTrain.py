@@ -10,7 +10,6 @@ data_train = {}
 symbol_train = {}
 image_train = {}
 
-
 def gettrainsymbol():
     for f in os.listdir(data_train_root):
         if f.endswith(".png"):
@@ -21,7 +20,6 @@ def gettrainsymbol():
     data_train["labels"] = symbol_train
     pf = open("train2.pkl","wb")
     pickle.dump(data_train, pf)
-
 
 def main():
     gettrainsymbol()
