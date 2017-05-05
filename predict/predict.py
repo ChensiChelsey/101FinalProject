@@ -170,7 +170,7 @@ def predict(image_path):
 
     # combine potential part in equation
     updated_symbol_list = pf.update(image_path, test_symbol_list)
-
+    
     # for each result in result list add it into return list
     for s in updated_symbol_list:
         pre_symbol = SymPred(s[1], s[2], s[3], s[4], s[5])
@@ -189,18 +189,18 @@ if __name__ == '__main__':
 #     image_folder_path = argv[1]
     image_folder_path = "./data/testEqual"
 #     image_folder_path = "./data/annotated_test_Equal"
-    isWindows_flag = True # TODO: !!!confirm need with TA
+    isWindows_flag = False 
     if len(argv) == 3:
         isWindows_flag = True
     if isWindows_flag:
-        image_paths = glob(image_folder_path + '/*png')
-    else:
         image_paths = glob(image_folder_path + '\\*png')
+    else:
+        image_paths = glob(image_folder_path + '/*png')
     results = []
 
     with tf.Session() as sess:
         sess.run(init_op)
-        saver.restore(sess, os.getcwd()+"/model4/model.ckpt")
+        saver.restore(sess, os.getcwd()+"/model3/model.ckpt")
         print ("Model restored.")
         nf = open("result.txt", 'w')
 
