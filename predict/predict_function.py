@@ -27,10 +27,10 @@ def imageprepare(image):
         wtop = int(round(((28 - nheight)/2),0)) #caculate horizontal pozition
         newImage.paste(img, (0, wtop)) #paste resized image
     else:
-        nwidth = int(round((20.0/height*width),0)) #resize width according to ratio height
-        img = im.resize((nwidth,20), Image.ANTIALIAS).filter(ImageFilter.SHARPEN)
+        nwidth = int(round((28.0/height*width),0)) #resize width according to ratio height
+        img = im.resize((nwidth,28), Image.ANTIALIAS).filter(ImageFilter.SHARPEN)
         wleft = int(round(((28 - nwidth)/2),0)) #caculate vertical pozition
-        newImage.paste(img, (wleft, 4)) #paste resized image on
+        newImage.paste(img, (wleft, 0)) #paste resized image on
     tv = list(newImage.getdata()) #get pixel values
     #normalize pixels to 0 and 1. 0 is pure white, 1 is pure black.
     tva = [ 1-(255-x)*1.0/255.0 for x in tv]
