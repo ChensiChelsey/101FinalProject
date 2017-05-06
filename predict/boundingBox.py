@@ -162,6 +162,7 @@ def connect(im, res):
     return finalRes
 
 # slices im into smaller images based on boxes
+# for debugging and testing
 def saveImages(im, boxes, im_name):
     '''input: image, boxes; return: None'''
     # make a tmpelate image for next crop
@@ -192,7 +193,8 @@ def saveImages(im, boxes, im_name):
     new_image = Image.fromarray(im)   
     new_image.save(equal_result_path + im_name + ".png")
         
-# slices im into smaller images based on boxes
+# output refined bounding boxes
+# for predict
 def createSymbol(path):
     '''input: image, boxes; return: None'''
     # make a tmpelate image for next crop
@@ -201,7 +203,6 @@ def createSymbol(path):
     rawRes = initialBoxes(im)  # raw bounding boxes
     boxes = connect(im, rawRes)
     boxes = sorted(boxes, key=lambda box: (box[1][1]-box[0][1]) * (box[1][0]-box[0][0]))
-    
     symbol_list= []
     for box in boxes:
         (x, y), (xw, yh) = box
