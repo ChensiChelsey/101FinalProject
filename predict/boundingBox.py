@@ -99,10 +99,13 @@ def isFraction(boundingBox, boundingBox1, boundingBox2):
 # return initial bounding boxes of input image
 def initialBoxes(im):
     '''input: image; return: None'''
-
     im[im >= 127] = 255
     im[im < 127] = 0
-
+    '''
+    # set the morphology kernel size, the number in tuple is the bold pixel size
+    kernel = np.ones((2,2),np.uint8)
+    im = cv2.morphologyEx(im, cv2.MORPH_CLOSE, kernel)
+    '''
     imgrey = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     ret, thresh = cv2.threshold(imgrey, 127, 255, 0)
     im2, contours, hierachy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) # RETR_EXTERNAL for only bounding outer box
@@ -113,7 +116,6 @@ def initialBoxes(im):
         # exclude the whole size image and noisy point
         if x is 0: continue
         if w*h < 25: continue
-            
         res.append([(x,y), (x+w, y+h)])
     return res
 
