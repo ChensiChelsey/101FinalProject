@@ -186,8 +186,8 @@ def predict(image_path):
     return img_prediction
 
 if __name__ == '__main__':
-#     image_folder_path = argv[1]
-    image_folder_path = "./data/testEqual"
+    image_folder_path = argv[1]
+#     image_folder_path = "./data/testEqual"
 #     image_folder_path = "./data/annotated_test_Equal"
     isWindows_flag = False 
     if len(argv) == 3:
@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
     with tf.Session() as sess:
         sess.run(init_op)
-        saver.restore(sess, os.getcwd()+"/model3/model.ckpt")
+        saver.restore(sess, os.getcwd()+"/model_final/model.ckpt")
         print ("Model restored.")
         nf = open("result.txt", 'w')
 

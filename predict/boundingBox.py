@@ -99,13 +99,16 @@ def isFraction(boundingBox, boundingBox1, boundingBox2):
 # return initial bounding boxes of input image
 def initialBoxes(im):
     '''input: image; return: None'''
+
     im[im >= 127] = 255
     im[im < 127] = 0
+    
     '''
     # set the morphology kernel size, the number in tuple is the bold pixel size
     kernel = np.ones((2,2),np.uint8)
     im = cv2.morphologyEx(im, cv2.MORPH_CLOSE, kernel)
     '''
+
     imgrey = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     ret, thresh = cv2.threshold(imgrey, 127, 255, 0)
     im2, contours, hierachy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) # RETR_EXTERNAL for only bounding outer box
@@ -116,6 +119,7 @@ def initialBoxes(im):
         # exclude the whole size image and noisy point
         if x is 0: continue
         if w*h < 25: continue
+            
         res.append([(x,y), (x+w, y+h)])
     return res
 
@@ -162,7 +166,6 @@ def connect(im, res):
     return finalRes
 
 # slices im into smaller images based on boxes
-# for debugging and testing
 def saveImages(im, boxes, im_name):
     '''input: image, boxes; return: None'''
     # make a tmpelate image for next crop
@@ -193,8 +196,7 @@ def saveImages(im, boxes, im_name):
     new_image = Image.fromarray(im)   
     new_image.save(equal_result_path + im_name + ".png")
         
-# output refined bounding boxes
-# for predict
+# slices im into smaller images based on boxes
 def createSymbol(path):
     '''input: image, boxes; return: None'''
     # make a tmpelate image for next crop
@@ -203,6 +205,7 @@ def createSymbol(path):
     rawRes = initialBoxes(im)  # raw bounding boxes
     boxes = connect(im, rawRes)
     boxes = sorted(boxes, key=lambda box: (box[1][1]-box[0][1]) * (box[1][0]-box[0][0]))
+    
     symbol_list= []
     for box in boxes:
         (x, y), (xw, yh) = box
